@@ -17,6 +17,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -102,7 +103,7 @@ export default function MiniDrawer(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={clsx(classes.root, "mydrawer")}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -122,11 +123,13 @@ export default function MiniDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
-            alt="Img"
-            height="25"
-          />
+          <Link to="/">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
+              alt="Img"
+              height="25"
+            />
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer

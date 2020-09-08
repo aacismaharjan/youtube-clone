@@ -8,7 +8,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { Box } from "@material-ui/core";
+import { Box, Divider } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,8 +17,18 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
     background: "transparent",
   },
+  alternateRoot: {
+    maxWidth: "100%",
+    boxShadow: "none",
+    background: "transparent",
+    display: "grid",
+    gridGap: "15px",
+    gridTemplateColumns: "2fr 3fr",
+    alignItems: "center",
+  },
+
   media: {
-    height: 0,
+    width: "100%",
     paddingTop: "56.25%", // 16:9
   },
   avatar: {
@@ -32,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard({ card }) {
+export function AlternateVideoCard({ card }) {
   const classes = useStyles();
 
   const subheaderjsx = (
@@ -47,12 +58,89 @@ export default function RecipeReviewCard({ card }) {
   );
 
   return (
+    <Link to={`/video/${card.video}`}>
+      <Card className={classes.alternateRoot}>
+        <CardMedia
+          className={classes.media}
+          image={card.thumbnail}
+          title="Paella dish"
+        />
+
+        <CardHeader
+          action={
+            <IconButton
+              aria-label="settings"
+              style={{ padding: "12px 0px 12px 0" }}
+            >
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={
+            <Box
+              style={{
+                fontWeight: "500",
+                fontSize: "15px",
+                letterSpacing: "0.005em",
+              }}
+            >
+              {card.title}
+            </Box>
+          }
+          subheader={subheaderjsx}
+          className={classes.header}
+        />
+      </Card>
+    </Link>
+  );
+}
+
+export function VideoPlayCard({ card, video }) {
+  const classes = useStyles();
+
+  const subheaderjsx = (
+    <div>
+      <Typography variant="body2" className={classes.bold}>
+        {card.name}
+      </Typography>
+      <Typography variant="body2" style={{ fontSize: 12 }}>
+        29.9M Subscribers
+      </Typography>
+    </div>
+  );
+
+  return (
     <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image={card.thumbnail}
-        title="Paella dish"
-      />
+      <Box className="videoContainer">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${video}?autoplay=1`}
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </Box>
+
+      <Typography
+        style={{
+          marginTop: "15px",
+          marginBottom: "5px",
+          fontSize: "18px",
+          fontWeight: "500",
+          color: "#303030",
+        }}
+      >
+        {card.title}
+      </Typography>
+      <Typography
+        style={{
+          fontSize: "14px",
+          fontWeight: "400",
+          color: "#606060",
+          marginBottom: "15px",
+        }}
+      >
+        2,838,677 views
+      </Typography>
+
+      <Divider />
 
       <CardHeader
         avatar={
@@ -61,24 +149,72 @@ export default function RecipeReviewCard({ card }) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
+          <IconButton
+            aria-label="settings"
+            style={{ padding: "12px 0px 12px 0" }}
+          >
             <MoreVertIcon />
           </IconButton>
         }
-        title={
-          <Box
-            style={{
-              fontWeight: "500",
-              fontSize: "15px",
-              letterSpacing: "0.005em",
-            }}
-          >
-            {card.title}
-          </Box>
-        }
-        subheader={subheaderjsx}
+        title={subheaderjsx}
         className={classes.header}
       />
     </Card>
+  );
+}
+
+export default function VideoCard({ card }) {
+  const classes = useStyles();
+
+  const subheaderjsx = (
+    <div>
+      <Typography variant="body2" className={classes.bold}>
+        {card.name}
+      </Typography>
+      <Typography variant="body2" className={classes.bold}>
+        2.5M views . 3 months ago
+      </Typography>
+    </div>
+  );
+
+  return (
+    <Link to={`video/${card.video}`}>
+      <Card className={classes.root}>
+        <CardMedia
+          className={classes.media}
+          image={card.thumbnail}
+          title="Paella dish"
+        />
+
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              {card.name.charAt(0)}
+            </Avatar>
+          }
+          action={
+            <IconButton
+              aria-label="settings"
+              style={{ padding: "12px 0px 12px 0" }}
+            >
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={
+            <Box
+              style={{
+                fontWeight: "500",
+                fontSize: "15px",
+                letterSpacing: "0.005em",
+              }}
+            >
+              {card.title}
+            </Box>
+          }
+          subheader={subheaderjsx}
+          className={classes.header}
+        />
+      </Card>
+    </Link>
   );
 }

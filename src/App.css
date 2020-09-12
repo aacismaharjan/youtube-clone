@@ -10,6 +10,14 @@ a {
   transition: none !important;
 }
 
+/* Video */
+h5.video-title {
+  color: #303030;
+  font-weight: 500;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
 .videoContainer {
   position: relative;
   width: 100%;
@@ -23,4 +31,21 @@ a {
   border: none;
   width: 100%;
   height: 100%;
+}
+
+/* Card */
+.card-main > div {
+  display: grid;
+  align-items: start;
+  grid-template-columns: 2fr 3fr;
+  grid-gap: 15px;
+  margin-bottom: 15px;
+}
+
+.card-main > div > .MuiCardHeader-root {
+  padding: 0px 8px 0px 0;
+}
+
+.card-main > div > .MuiCardHeader-root .MuiCardHeader-avatar {
+  display: none;
 }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import VideoCard from "./Card";
-import { fetchVideos } from "../api/";
+import VideoCard from "./VideoCard";
+import { fetchVideos } from "../api";
 import { Grid, Box, Typography } from "@material-ui/core";
-import defaultThumbnail from "../assets/thumbnail.jpg";
+import VideosSectionTitle from "./VideosSectionTitle";
 
 export default class Cards extends Component {
   state = {
@@ -25,13 +25,9 @@ export default class Cards extends Component {
 
     return (
       <Box>
-        <Typography
-          style={{ marginBottom: 20, fontWeight: "500" }}
-          variant="h5"
-        >
-          Recommended Videos
-        </Typography>
-        <Grid container spacing={2} justifyItems="center">
+        <VideosSectionTitle>Recommended Videos</VideosSectionTitle>
+
+        <Grid container spacing={2}>
           {videos.map((card, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
               <VideoCard key={index} card={card} />

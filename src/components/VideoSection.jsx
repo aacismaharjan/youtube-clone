@@ -1,38 +1,35 @@
 import React, { Component } from "react";
 import { Grid } from "@material-ui/core";
-import VideoCard, { AlternateVideoCard, VideoPlayCard } from "./Card";
+import VideoCard from "./VideoCard";
 import defaultThumbnail from "../assets/thumbnail.jpg";
-import { fetchVideos } from "../api";
+import { fetchVideos, fetchRelatedVideos } from "../api";
+import VideoPlayer from "./VideoPlayer";
 
 export default class VideoSection extends Component {
   state = {
-    slug: this.props.match.params.slug,
     videos: [],
+    defaultVideoId: "WOKOiZo5zAQ",
   };
 
   async componentDidMount() {
-    const videos = await fetchVideos();
-    this.setState({ videos });
+    const videos = await fetchRelatedVideos(this.state.defaultVideoId);
+    console.log(videos);
   }
 
   render() {
-    var card = {
-      name: "Aashish Maharjan",
-      thumbnail: defaultThumbnail,
-      title: "Grabbing my first award from the best college of Nepal",
-    };
-
     const { videos } = this.state;
 
     return (
       <Grid container spacing={3}>
         <Grid item xs={8}>
-          <VideoPlayCard card={card} video={this.state.slug} />
+          <VideoPlayer id={this.props.match.params.slug} />
         </Grid>
 
         <Grid item xs={4}>
           {videos.length &&
-            videos.map((card, index) => <AlternateVideoCard card={card} />)}
+            videos.map((card, index) => (
+              <VideoCard isSide key={index} card={card} />
+            ))}
         </Grid>
       </Grid>
     );

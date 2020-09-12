@@ -6,7 +6,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -35,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#606060",
     background: "rgba(255, 255, 255, 0.97)",
     borderBottom: "1px solid lightgray",
-    transition: "none",
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -127,7 +125,7 @@ export default function MiniDrawer(props) {
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
               alt="Img"
-              height="25"
+              height="20"
             />
           </Link>
         </Toolbar>

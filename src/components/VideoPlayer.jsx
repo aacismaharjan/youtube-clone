@@ -58,7 +58,6 @@ export default function VideoPlayer({ id }) {
   }, [id]);
 
   if (!stats.id) {
-    console.log(stats);
     return "Loading...";
   }
 

@@ -8,12 +8,12 @@ import VideoPlayer from "./VideoPlayer";
 export default class VideoSection extends Component {
   state = {
     videos: [],
-    defaultVideoId: "WOKOiZo5zAQ",
+    defaultVideoId: this.props.match.params.slug, //default
   };
 
   async componentDidMount() {
     const videos = await fetchRelatedVideos(this.state.defaultVideoId);
-    console.log(videos);
+    if (videos) this.setState({ videos });
   }
 
   render() {

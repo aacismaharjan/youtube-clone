@@ -1,8 +1,7 @@
 const API = "AIzaSyAeLqwHJ90UYVReG8YlQGD4LlYhtScevvs";
 
 const fetchVideos = async () => {
-  const URL = `https://www.googleapis.com/youtube/v3/videos?part=snippet%2Cstatistics&chart=mostPopular&maxResults=10&key=${API}`;
-  console.log(URL);
+  const URL = `https://www.googleapis.com/youtube/v3/videos?part=snippet%2Cstatistics&chart=mostPopular&maxResults=20&key=${API}&regionCode=np`;
 
   return await fetch(URL)
     .then((res) => res.json())
@@ -30,10 +29,8 @@ const fetchSpecificVideo = async (id) => {
 };
 
 const fetchRelatedVideos = async (id) => {
-  const URL = `https://www.googleapis.com/youtube/v3/search?part=snippet%2Cstatistics&maxResults=8&relatedToVideoId=${id}&type=video&key=${API}`;
-
+  const URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=16&relatedToVideoId=${id}&type=video&key=${API}`;
   console.log(URL);
-
   return await fetch(URL)
     .then((res) => res.json())
     .then(({ items }) => {
@@ -42,10 +39,9 @@ const fetchRelatedVideos = async (id) => {
         thumbnail: item.snippet.thumbnails.medium.url,
         title: item.snippet.title,
         date: item.snippet.publishedAt,
-        video: item.id,
-        views: item.statistics.viewCount,
+        video: item.id.videoId,
+        views: "N/A",
       }));
-      console.log("Videos", videos);
       return videos;
     })
     .catch((err) => console.log(err));
